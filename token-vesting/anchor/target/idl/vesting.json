@@ -1,7 +1,7 @@
 {
   "address": "AsjZ3kWAUSQRNt2pZVeJkywhZ6gpLpHZmJjduPmKZDZZ",
   "metadata": {
-    "name": "tokenvesting",
+    "name": "vesting",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Anchor"

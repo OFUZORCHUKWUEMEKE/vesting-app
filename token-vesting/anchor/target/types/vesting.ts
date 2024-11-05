@@ -1,14 +1,20 @@
-{
+/**
+ * Program IDL in camelCase format in order to be used in JS/TS.
+ *
+ * Note that this is only a type helper and is not the actual IDL. The original
+ * IDL can be found at `target/idl/vesting.json`.
+ */
+export type Vesting = {
   "address": "AsjZ3kWAUSQRNt2pZVeJkywhZ6gpLpHZmJjduPmKZDZZ",
   "metadata": {
-    "name": "tokenvesting",
+    "name": "vesting",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Anchor"
   },
   "instructions": [
     {
-      "name": "claim_tokens",
+      "name": "claimTokens",
       "discriminator": [
         108,
         216,
@@ -25,11 +31,11 @@
           "writable": true,
           "signer": true,
           "relations": [
-            "employee_account"
+            "employeeAccount"
           ]
         },
         {
-          "name": "employee_account",
+          "name": "employeeAccount",
           "writable": true,
           "pda": {
             "seeds": [
@@ -60,41 +66,41 @@
               },
               {
                 "kind": "account",
-                "path": "vesting_account"
+                "path": "vestingAccount"
               }
             ]
           }
         },
         {
-          "name": "vesting_account",
+          "name": "vestingAccount",
           "writable": true,
           "pda": {
             "seeds": [
               {
                 "kind": "arg",
-                "path": "company_name"
+                "path": "companyName"
               }
             ]
           },
           "relations": [
-            "employee_account"
+            "employeeAccount"
           ]
         },
         {
           "name": "mint",
           "relations": [
-            "vesting_account"
+            "vestingAccount"
           ]
         },
         {
-          "name": "treasury_token_account",
+          "name": "treasuryTokenAccount",
           "writable": true,
           "relations": [
-            "vesting_account"
+            "vestingAccount"
           ]
         },
         {
-          "name": "employee_token_account",
+          "name": "employeeTokenAccount",
           "writable": true,
           "pda": {
             "seeds": [
@@ -104,7 +110,7 @@
               },
               {
                 "kind": "account",
-                "path": "token_program"
+                "path": "tokenProgram"
               },
               {
                 "kind": "account",
@@ -151,26 +157,26 @@
           }
         },
         {
-          "name": "token_program"
+          "name": "tokenProgram"
         },
         {
-          "name": "associated_token_program",
+          "name": "associatedTokenProgram",
           "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
         },
         {
-          "name": "system_program",
+          "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "_company_name",
+          "name": "companyName",
           "type": "string"
         }
       ]
     },
     {
-      "name": "create_employee_vesting",
+      "name": "createEmployeeVesting",
       "discriminator": [
         213,
         201,
@@ -187,17 +193,17 @@
           "writable": true,
           "signer": true,
           "relations": [
-            "vesting_account"
+            "vestingAccount"
           ]
         },
         {
           "name": "beneficiary"
         },
         {
-          "name": "vesting_account"
+          "name": "vestingAccount"
         },
         {
-          "name": "employee_account",
+          "name": "employeeAccount",
           "writable": true,
           "pda": {
             "seeds": [
@@ -228,37 +234,37 @@
               },
               {
                 "kind": "account",
-                "path": "vesting_account"
+                "path": "vestingAccount"
               }
             ]
           }
         },
         {
-          "name": "system_program",
+          "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "start_time",
+          "name": "startTime",
           "type": "i64"
         },
         {
-          "name": "end_time",
+          "name": "endTime",
           "type": "i64"
         },
         {
-          "name": "total_amount",
+          "name": "totalAmount",
           "type": "i64"
         },
         {
-          "name": "cliff_time",
+          "name": "cliffTime",
           "type": "i64"
         }
       ]
     },
     {
-      "name": "create_vesting_account",
+      "name": "createVestingAccount",
       "discriminator": [
         129,
         178,
@@ -276,13 +282,13 @@
           "signer": true
         },
         {
-          "name": "vesting_account",
+          "name": "vestingAccount",
           "writable": true,
           "pda": {
             "seeds": [
               {
                 "kind": "arg",
-                "path": "company_name"
+                "path": "companyName"
               }
             ]
           }
@@ -291,7 +297,7 @@
           "name": "mint"
         },
         {
-          "name": "treasury_token_account",
+          "name": "treasuryTokenAccount",
           "writable": true,
           "pda": {
             "seeds": [
@@ -318,22 +324,22 @@
               },
               {
                 "kind": "arg",
-                "path": "company_name"
+                "path": "companyName"
               }
             ]
           }
         },
         {
-          "name": "token_program"
+          "name": "tokenProgram"
         },
         {
-          "name": "system_program",
+          "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "company_name",
+          "name": "companyName",
           "type": "string"
         }
       ]
@@ -341,7 +347,7 @@
   ],
   "accounts": [
     {
-      "name": "EmployeeAccount",
+      "name": "employeeAccount",
       "discriminator": [
         65,
         245,
@@ -354,7 +360,7 @@
       ]
     },
     {
-      "name": "VestingAccount",
+      "name": "vestingAccount",
       "discriminator": [
         102,
         73,
@@ -370,18 +376,18 @@
   "errors": [
     {
       "code": 6000,
-      "name": "ClaimNotAvailableYet",
+      "name": "claimNotAvailableYet",
       "msg": "Claiming is not available yet."
     },
     {
       "code": 6001,
-      "name": "NothingToClaim",
+      "name": "nothingToClaim",
       "msg": "There is nothing to claim."
     }
   ],
   "types": [
     {
-      "name": "EmployeeAccount",
+      "name": "employeeAccount",
       "type": {
         "kind": "struct",
         "fields": [
@@ -390,27 +396,27 @@
             "type": "pubkey"
           },
           {
-            "name": "start_time",
+            "name": "startTime",
             "type": "i64"
           },
           {
-            "name": "end_time",
+            "name": "endTime",
             "type": "i64"
           },
           {
-            "name": "total_amount",
+            "name": "totalAmount",
             "type": "i64"
           },
           {
-            "name": "total_withdrawn",
+            "name": "totalWithdrawn",
             "type": "i64"
           },
           {
-            "name": "cliff_time",
+            "name": "cliffTime",
             "type": "i64"
           },
           {
-            "name": "vesting_account",
+            "name": "vestingAccount",
             "type": "pubkey"
           },
           {
@@ -421,7 +427,7 @@
       }
     },
     {
-      "name": "VestingAccount",
+      "name": "vestingAccount",
       "type": {
         "kind": "struct",
         "fields": [
@@ -434,15 +440,15 @@
             "type": "pubkey"
           },
           {
-            "name": "treasury_token_account",
+            "name": "treasuryTokenAccount",
             "type": "pubkey"
           },
           {
-            "name": "company_name",
+            "name": "companyName",
             "type": "string"
           },
           {
-            "name": "treasury_bump",
+            "name": "treasuryBump",
             "type": "u8"
           },
           {
@@ -453,4 +459,4 @@
       }
     }
   ]
-}
+};
